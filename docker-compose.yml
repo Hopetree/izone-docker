@@ -1,0 +1,51 @@
+version: "3"
+services:
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+      - ./db/sql:/var/lib/sql
+      - ./db/my.cnf:/etc/my.cnf
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: python
+      MYSQL_DATABASE: tendcode
+
+  redis:
+    image: redis
+    restart: always
+
+  web:
+    build:
+      context: .
+      dockerfile: ${DOCKERFILE_NAME}
+    environment:
+      WEB_MYSQL_HOST: db
+      WEB_REDIS_HOST: redis
+    command: gunicorn izone.wsgi -b 0.0.0.0:8000
+    restart: always
+    volumes:
+      - ./izone:/app/izone
+    links:
+      - db
+      - redis
+    depends_on:
+      - db
+      - redis
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./izone/static:/opt/izone/static
+      - ./izone/media:/opt/izone/media
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/log:/var/log/nginx
+    ports:
+      - "80:80"
+    links:
+      - web
+    depends_on:
+      - web
+    restart: always
+
