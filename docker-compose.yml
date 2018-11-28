@@ -9,8 +9,8 @@ services:
       - ./db/my.cnf:/etc/my.cnf
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: python
-      MYSQL_DATABASE: tendcode
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
 
   redis:
     image: redis
@@ -20,9 +20,8 @@ services:
     build:
       context: .
       dockerfile: ${DOCKERFILE_NAME}
-    environment:
-      WEB_MYSQL_HOST: db
-      WEB_REDIS_HOST: redis
+    env_file:
+      - ./izone/izone.env
     command: gunicorn izone.wsgi -b 0.0.0.0:8000
     restart: always
     volumes:
