@@ -9,6 +9,7 @@ services:
       - ./db/my.cnf:/etc/my.cnf
       - ./db/backup.sh:/etc/cron.daily/backup.sh
     restart: always
+    container_name: izone_db
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -16,14 +17,16 @@ services:
   redis:
     image: redis
     restart: always
+    container_name: izone_redis
 
   web:
     build:
       context: .
       dockerfile: ${DOCKERFILE_NAME}
+    container_name: izone_web
     env_file:
       - ./izone/izone.env
-    command: gunicorn izone.wsgi -b 0.0.0.0:8000
+    command: gunicorn izone.wsgi -b 0.0.0.0:80
     restart: always
     volumes:
       - ./izone:/app/izone
@@ -36,6 +39,7 @@ services:
 
   nginx:
     image: nginx
+    container_name: izone_nginx
     volumes:
       - ./izone/static:/opt/izone/static
       - ./izone/media:/opt/izone/media
@@ -45,7 +49,6 @@ services:
       - "80:80"
     links:
       - web
-    depends_on:
-      - web
+      - web:www.tendcode.com
     restart: always
 
