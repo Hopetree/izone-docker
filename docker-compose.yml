@@ -7,7 +7,6 @@ services:
       - ./db/mysql:/var/lib/mysql
       - ./db/sql:/var/lib/sql
       - ./db/my.cnf:/etc/my.cnf
-      - ./db/backup.sh:/etc/cron.daily/backup.sh
     restart: always
     container_name: izone_db
     environment:
