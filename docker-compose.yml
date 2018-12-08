@@ -5,7 +5,7 @@ services:
     image: mysql:5.7
     volumes:
       - ./db/mysql:/var/lib/mysql
-      - ./db/sql:/var/lib/sql
+      - ./db/sql:/opt/sql
       - ./db/my.cnf:/etc/my.cnf
     restart: always
     container_name: izone_db
