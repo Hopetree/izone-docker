@@ -48,6 +48,6 @@ services:
       - "80:80"
     links:
       - web
-      - web:www.tendcode.com
+      - web:${DOMAIN_NAME}
     restart: always
 
