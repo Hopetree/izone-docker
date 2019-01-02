@@ -1,7 +1,8 @@
 FROM frolvlad/alpine-python3
 ENV PYTHONUNBUFFERED=1
-RUN apk add jpeg-dev zlib-dev gcc python3-dev libc-dev
-RUN mkdir -p /app/izone
+RUN apk add -U jpeg-dev zlib-dev gcc python3-dev libc-dev tzdata
+RUN mkdir -p /app/izone \
+  && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 WORKDIR /app/izone
 COPY ./izone .
 RUN pip install -r requirements.txt -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
