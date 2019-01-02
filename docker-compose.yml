@@ -44,7 +44,6 @@ services:
       - ./izone/media:/opt/izone/media
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/log:/var/log/nginx
-      - ./web/localtime:/etc/localtime
     ports:
       - "80:80"
     links:
