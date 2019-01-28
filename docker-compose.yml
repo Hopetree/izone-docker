@@ -46,6 +46,7 @@ services:
       - ./nginx/log:/var/log/nginx
     ports:
       - "80:80"
+      - "443:443"
     links:
       - web
       - web:${DOMAIN_NAME}
