@@ -29,8 +29,6 @@ services:
     restart: always
     volumes:
       - ./izone:/app/izone
-    ports:
-      - "8000:8000"
     links:
       - db
       - redis
