@@ -25,7 +25,7 @@ services:
     container_name: izone_web
     env_file:
       - ./izone/izone.env
-    command: gunicorn izone.wsgi -b 0.0.0.0:80
+    command: gunicorn izone.wsgi -b 0.0.0.0:8000
     restart: always
     volumes:
       - ./izone:/app/izone
@@ -46,8 +46,8 @@ services:
       - ./nginx/log:/var/log/nginx
     ports:
       - "80:80"
+      - "443:443"
     links:
       - web
-      - web:${DOMAIN_NAME}
     restart: always
 
