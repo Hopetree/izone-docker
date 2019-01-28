@@ -29,6 +29,8 @@ services:
     restart: always
     volumes:
       - ./izone:/app/izone
+    ports:
+      - "8000:8000"
     links:
       - db
       - redis
@@ -45,7 +47,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/log:/var/log/nginx
     ports:
-      - "8000:80"
+      - "80:80"
       - "443:443"
     links:
       - web
