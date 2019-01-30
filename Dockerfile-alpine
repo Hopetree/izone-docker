@@ -1,8 +1,14 @@
 FROM frolvlad/alpine-python3
 ENV PYTHONUNBUFFERED=1
-RUN apk add -U jpeg-dev zlib-dev gcc python3-dev libc-dev tzdata
+
+# change repositories to aliyun
+RUN cp -a /etc/apk/repositories /etc/apk/repositories.bak \
+  && sed -i "s@http://dl-cdn.alpinelinux.org/@https://mirrors.aliyun.com/@g" /etc/apk/repositories \
+  && apk add -U jpeg-dev zlib-dev gcc python3-dev libc-dev tzdata
+
 RUN mkdir -p /app/izone \
   && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 WORKDIR /app/izone
 COPY ./izone .
 RUN pip install -r requirements.txt -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
