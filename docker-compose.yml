@@ -6,7 +6,7 @@ services:
     image: mysql:5.7
     container_name: izone_db
     volumes:
-      - mysql:/var/lib/mysql
+      - ./db/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     networks:
@@ -14,7 +14,7 @@ services:
 
   redis:
     restart: always
-    image: redis:alpine
+    image: redis
     container_name: izone_redis
     networks:
       - backend
@@ -27,28 +27,27 @@ services:
       - ./izone.env
     command: gunicorn izone.wsgi -b 0.0.0.0:8000
     volumes:
-      - ./static:/opt/cloud/izone/static
-      - ./media:/opt/cloud/izone/media
-      - ./whoosh_index:/opt/cloud/izone/whoosh_index
+      - ./web/static:/opt/cloud/izone/static
+      - ./web/media:/opt/cloud/izone/media
+      - ./web/whoosh_index:/opt/cloud/izone/whoosh_index
     links:
       - db
       - redis
     depends_on:
       - db
       - redis
-    ports:
-      - "8000:8000"
     networks:
       - backend
 
   nginx:
     restart: always
-    image: nginx:alpine
+    image: nginx
     container_name: izone_nginx
     volumes:
-      - ./static:/opt/izone/static
-      - ./media:/opt/izone/media
-      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./web/static:/opt/izone/static:ro
+      - ./web/media:/opt/izone/media:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl_cert:ro
       - ./nginx/log:/var/log/nginx
     ports:
       - "80:80"
@@ -57,9 +56,6 @@ services:
       - web
     networks:
       - backend
-
-volumes:
-  mysql:
 
 networks:
   backend:
