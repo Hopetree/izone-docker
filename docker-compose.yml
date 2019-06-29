@@ -14,7 +14,7 @@ services:
 
   redis:
     restart: always
-    image: redis
+    image: redis:alpine
     container_name: izone_redis
     networks:
       - backend
@@ -36,12 +36,14 @@ services:
     depends_on:
       - db
       - redis
+    ports:
+      - "8000:8000"
     networks:
       - backend
 
   nginx:
     restart: always
-    image: nginx
+    image: nginx:alpine
     container_name: izone_nginx
     volumes:
       - ./static:/opt/izone/static
