@@ -3,7 +3,7 @@ services:
 
   db:
     restart: always
-    image: mysql:5.7
+    image: ${MYSQL_IMAGE}
     container_name: izone_db
     volumes:
       - ./db/mysql:/var/lib/mysql
@@ -14,14 +14,14 @@ services:
 
   redis:
     restart: always
-    image: redis
+    image: ${REDIS_IMAGE}
     container_name: izone_redis
     networks:
       - backend
 
   web:
     restart: always
-    image: izone:1.0
+    image: ${IZONE_IMAGE}
     container_name: izone_web
     env_file:
       - ./izone.env
@@ -41,7 +41,7 @@ services:
 
   nginx:
     restart: always
-    image: nginx
+    image: ${NGINX_IMAGE}
     container_name: izone_nginx
     volumes:
       - ./web/static:/opt/izone/static:ro
