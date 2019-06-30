@@ -9,7 +9,7 @@ services:
       - ./db/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      IZONE_MYSQL_NAME: ${IZONE_MYSQL_NAME}
+      MYSQL_DATABASE_IZONE: ${IZONE_MYSQL_NAME}
     networks:
       - backend
 
