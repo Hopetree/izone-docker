@@ -23,6 +23,14 @@ services:
     restart: always
     image: ${IZONE_IMAGE}
     container_name: izone_web
+    environment:
+      IZONE_MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      IZONE_MYSQL_HOST: db
+      IZONE_MYSQL_NAME: ${IZONE_MYSQL_NAME}
+      IZONE_MYSQL_USER: root
+      IZONE_MYSQL_PORT: 3306
+      IZONE_REDIS_HOST: redis
+      IZONE_REDIS_PORT: 6379
     env_file:
       - ./izone.env
     command: gunicorn izone.wsgi -b 0.0.0.0:8000
