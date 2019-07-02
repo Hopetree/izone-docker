@@ -48,6 +48,7 @@ services:
       - redis
     networks:
       - backend
+      - frontend
 
   nginx:
     restart: always
@@ -65,8 +66,10 @@ services:
     links:
       - web
     networks:
-      - backend
+      - frontend
 
 networks:
   backend:
+    driver: bridge
+  frontend:
     driver: bridge
