@@ -7,9 +7,10 @@ services:
     container_name: izone_db
     volumes:
       - ./db/mysql:/var/lib/mysql
+      - ./db/my.cnf:/etc/my.cnf:ro
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE_IZONE: ${IZONE_MYSQL_NAME}
+      MYSQL_DATABASE: ${IZONE_MYSQL_NAME}
     networks:
       - backend
 
