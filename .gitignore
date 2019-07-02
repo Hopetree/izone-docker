@@ -95,4 +95,13 @@ ENV/
 # Rope project settings
 .ropeproject
 
+
+# izone ignore
 *.env
+db/
+!db/my.cnf
+nginx/
+!nginx/conf.d/*.conf
+web/
+
+
