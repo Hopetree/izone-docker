@@ -2,7 +2,7 @@
 
 # 判断如果不是root权限就退出执行
 [ `id -u` -ne 0 ] && echo "[WARNING] it should be root" && exit 1
-
+cd `dirname $0`
 source ./.env
 # 仅更新web镜像
 upgrade_web()
