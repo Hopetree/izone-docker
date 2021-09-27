@@ -55,8 +55,6 @@ services:
     image: ${NGINX_IMAGE}
     container_name: izone_nginx
     volumes:
-      - ./web/static:/opt/izone/static:ro
-      - ./web/media:/opt/izone/media:ro
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
       - ./nginx/log:/var/log/nginx
     ports:
