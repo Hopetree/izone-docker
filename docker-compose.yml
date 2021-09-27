@@ -58,11 +58,9 @@ services:
       - ./web/static:/opt/izone/static:ro
       - ./web/media:/opt/izone/media:ro
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./nginx/ssl_cert:/etc/nginx/ssl_cert:ro
       - ./nginx/log:/var/log/nginx
     ports:
-      - "80:80"
-      - "443:443"
+      - "8888:80"
     links:
       - web
     networks:
