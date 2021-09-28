@@ -57,6 +57,8 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
       - ./nginx/log:/var/log/nginx
+      - ./web/static:/usr/share/nginx/izone/static
+      - ./web/media:/usr/share/nginx/izone/media
     ports:
       - "8888:80"
     links:
