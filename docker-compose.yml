@@ -60,7 +60,7 @@ services:
       - ./web/static:/usr/share/nginx/izone/static
       - ./web/media:/usr/share/nginx/izone/media
     ports:
-      - "8888:80"
+      - "${NGINX_PORT}:80"
     links:
       - web
     networks:
