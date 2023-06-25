@@ -35,7 +35,6 @@ services:
       IZONE_REDIS_PORT: 6379
     env_file:
       - ./izone.env
-    command: gunicorn izone.wsgi -b 0.0.0.0:8000
     volumes:
       - ./web/static:/opt/cloud/izone/static
       - ./web/media:/opt/cloud/izone/media
