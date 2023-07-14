@@ -39,7 +39,7 @@ services:
       - ./web/static:/opt/cloud/izone/static
       - ./web/media:/opt/cloud/izone/media
       - ./web/whoosh_index:/opt/cloud/izone/whoosh_index
-      - ./web/log:/var/log/supervisor
+      - ./web/log:/opt/cloud/izone/log
     links:
       - db
       - redis
