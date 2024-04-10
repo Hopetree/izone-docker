@@ -99,6 +99,8 @@ ENV/
 
 # izone ignore
 *.env
-web/
+
+# 禁用上传目录
+upload/
 
 
