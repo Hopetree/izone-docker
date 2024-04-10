@@ -99,6 +99,5 @@ ENV/
 
 # izone ignore
 *.env
-web/
 
 
