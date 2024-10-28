@@ -18,6 +18,8 @@ services:
     restart: always
     image: ${REDIS_IMAGE}
     container_name: izone_redis
+    volumes:
+      - ./redis/data:/data
     networks:
       - backend
 
